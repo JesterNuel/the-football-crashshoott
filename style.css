@@ -84,10 +84,6 @@ p {
     font-size: 0.95rem;
 }
 
-.role-card p {
-    font-size: 0.75rem;
-}
-
 button {
     background: #6c5ce7;
     color: #fff;
@@ -103,7 +99,7 @@ button:hover {
     background: #5849be;
 }
 
-/* --- HUD & CANVAS --- */
+/* --- THE SPIKE HUD --- */
 #spike-hud {
     width: 100%;
     display: flex;
