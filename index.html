@@ -3,72 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Striker: Aizen Cross</title>
+    <title>The Striker: Aizen Bankai Cross</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="game-container">
-        <!-- Main Menu / Character Select -->
+        <!-- Main Menu -->
         <div id="menu-screen" class="screen">
             <h1>THE STRIKER: AIZEN CROSS</h1>
-            <p>Pilih Role Karakter Sosuke Aizen</p>
-            <div class="role-select">
-                <div class="role-card selected" onclick="selectRole('ST')">
-                    <h3>Striker (ST)</h3>
-                    <p>Power Tendangan Maksimal</p>
-                </div>
-                <div class="role-card" onclick="selectRole('MID')">
-                    <h3>Gelandang (MID)</h3>
-                    <p>Kontrol & Passing Cepat</p>
-                </div>
-                <div class="role-card" onclick="selectRole('GK')">
-                    <h3>Goalkeeper (GK)</h3>
-                    <p>Refleks Blok Gawang</p>
-                </div>
+            <p>Mode 3v3 + Ultimate Skill: Bankai Kyoka Suigetsu</p>
+            <div class="team-info-box">
+                <h3>Karakter: Sosuke Aizen (ST)</h3>
+                <p>Tekan tombol BANKAI untuk jurus pemungkas pencetak gol instan!</p>
             </div>
             <button id="start-btn" onclick="startGame()">MULAI PERTANDINGAN</button>
         </div>
 
         <!-- Game Play Screen -->
         <div id="play-screen" class="screen hidden">
-            <!-- HUD Atas ala The Spike -->
-            <div id="spike-hud">
-                <div class="player-hud-card left-card">
-                    <div class="avatar" id="p1-avatar">ST</div>
-                    <div class="hud-info">
-                        <span class="p-name" id="p1-name-text">AIZEN (ST)</span>
-                        <div class="bar-container"><div class="fill-bar" id="p1-stamina"></div></div>
+            <!-- Top HUD -->
+            <div id="top-hud">
+                <div id="left-hud-extras">
+                    <div class="icon-btn" title="Determination">🔥</div>
+                    <div class="icon-btn" title="Highlights">📷</div>
+                </div>
+                
+                <div id="scoreboard-banner">
+                    <span id="team-home-name">Terra FC (Aizen)</span>
+                    <div id="score-box">
+                        <span id="score-home">0</span>
+                        <span id="vs-badge">VS</span>
+                        <span id="score-away">0</span>
                     </div>
+                    <span id="team-away-name">Blue Lancia</span>
                 </div>
 
-                <div class="center-score">
-                    <span class="score-num" id="score-home">0</span>
-                    <span class="score-num" id="score-away">0</span>
-                    <div id="match-timer">03:00</div>
-                </div>
-
-                <div class="player-hud-card right-card">
-                    <div class="hud-info text-right">
-                        <span class="p-name">KEN (GK)</span>
-                        <div class="bar-container"><div class="fill-bar opponent-bar" id="p2-stamina"></div></div>
-                    </div>
-                    <div class="avatar opponent-avatar">GK</div>
+                <div id="right-hud-extras">
+                    <div class="top-utility-btn">Sub</div>
+                    <div class="top-utility-btn">Time</div>
+                    <div class="top-utility-btn">⏸</div>
                 </div>
             </div>
 
             <!-- Canvas Lapangan -->
-            <canvas id="gameCanvas" width="800" height="340"></canvas>
+            <canvas id="gameCanvas" width="900" height="420"></canvas>
 
-            <!-- Virtual Controller (On-Screen Touch Buttons) -->
-            <div id="virtual-controller">
-                <div class="dpad-group">
-                    <button class="ctrl-btn" ontouchstart="setControl('left', true)" ontouchend="setControl('left', false)" onmousedown="setControl('left', true)" onmouseup="setControl('left', false)">◀ Kiri</button>
-                    <button class="ctrl-btn" ontouchstart="setControl('right', true)" ontouchend="setControl('right', false)" onmousedown="setControl('right', true)" onmouseup="setControl('right', false)">Kanan ▶</button>
+            <!-- Bottom Controller + Tombol Bankai -->
+            <div id="bottom-hud">
+                <div id="dpad-container">
+                    <div id="dpad-ring">
+                        <div class="dpad-arrow" ontouchstart="setControl('left', true)" ontouchend="setControl('left', false)" onmousedown="setControl('left', true)" onmouseup="setControl('left', false)">◀</div>
+                        <div class="dpad-arrow" ontouchstart="setControl('right', true)" ontouchend="setControl('right', false)" onmousedown="setControl('right', true)" onmouseup="setControl('right', false)">▶</div>
+                    </div>
                 </div>
-                <div class="action-group">
-                    <button class="ctrl-btn action-jump" ontouchstart="setControl('jump', true)" ontouchend="setControl('jump', false)" onmousedown="setControl('jump', true)" onmouseup="setControl('jump', false)">Lompat</button>
-                    <button class="ctrl-btn action-pass" ontouchstart="setControl('pass', true)" ontouchend="setControl('pass', false)" onmousedown="setControl('pass', true)" onmouseup="setControl('pass', false)">Passing</button>
-                    <button class="ctrl-btn action-shoot" ontouchstart="setControl('shoot', true)" ontouchend="setControl('shoot', false)" onmousedown="setControl('shoot', true)" onmouseup="setControl('shoot', false)">Tendang</button>
+
+                <!-- Tombol Skill Spesial Bankai -->
+                <div id="skill-container">
+                    <button id="bankai-btn" onclick="activateBankai()">⚡ BANKAI</button>
+                </div>
+
+                <div id="action-buttons-container">
+                    <div class="action-circle-btn" ontouchstart="setControl('pass', true)" ontouchend="setControl('pass', false)" onmousedown="setControl('pass', true)" onmouseup="setControl('pass', false)"><span>PASS</span></div>
+                    <div class="action-circle-btn action-jump-btn" ontouchstart="setControl('jump', true)" ontouchend="setControl('jump', false)" onmousedown="setControl('jump', true)" onmouseup="setControl('jump', false)"><span>JUMP</span></div>
+                    <div class="action-circle-btn action-shoot-btn" ontouchstart="setControl('shoot', true)" ontouchend="setControl('shoot', false)" onmousedown="setControl('shoot', true)" onmouseup="setControl('shoot', false)"><span>SHOOT</span></div>
                 </div>
             </div>
         </div>
