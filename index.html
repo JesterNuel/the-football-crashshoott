@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Striker: Football Cross</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Main Menu / Character Select -->
+        <div id="menu-screen" class="screen">
+            <h1>THE STRIKER: FOOTBALL CROSS</h1>
+            <p>Pilih Formasi & Karakter Tim Kamu</p>
+            <div class="role-select">
+                <div class="role-card" onclick="selectRole('ST')">
+                    <h3>Striker (ST)</h3>
+                    <p>Eks Wing Spiker - Power & Finishing Tinggi</p>
+                </div>
+                <div class="role-card" onclick="selectRole('MID')">
+                    <h3>Gelandang (Midfielder)</h3>
+                    <p>Eks Setter - Kontrol Bola & Passing Akurat</p>
+                </div>
+                <div class="role-card" onclick="selectRole('GK')">
+                    <h3>Goalkeeper (GK)</h3>
+                    <p>Eks Middle Blocker - Refleks & Block Gawang</p>
+                </div>
+            </div>
+            <button id="start-btn" onclick="startGame()">MULAILAH PERTANDINGAN</button>
+        </div>
+
+        <!-- Game Play Screen -->
+        <div id="play-screen" class="screen hidden">
+            <div id="scoreboard">
+                <span id="team-left">Pemain: <strong id="score-home">0</strong></span>
+                <span id="match-timer">03:00</span>
+                <span id="team-right">Lawan: <strong id="score-away">0</strong></span>
+            </div>
+            <canvas id="gameCanvas" width="800" height="450"></canvas>
+            <div id="controls-hint">
+                <p>Gunakan Tombol Panah / D-Pad untuk Gerak | Tombol K / X untuk Tendang / Passing</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
