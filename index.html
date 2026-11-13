@@ -15,15 +15,15 @@
             <div class="role-select">
                 <div class="role-card selected" onclick="selectRole('ST')">
                     <h3>Striker (ST)</h3>
-                    <p>Aizen (Striker Utama) - Power Tendangan Mematikan</p>
+                    <p>Power Tendangan Maksimal</p>
                 </div>
                 <div class="role-card" onclick="selectRole('MID')">
                     <h3>Gelandang (MID)</h3>
-                    <p>Aizen (Playmaker) - Kontrol & Passing Presisi</p>
+                    <p>Kontrol & Passing Cepat</p>
                 </div>
                 <div class="role-card" onclick="selectRole('GK')">
                     <h3>Goalkeeper (GK)</h3>
-                    <p>Aizen (Kiper) - Pertahanan Mutlak / Kyoka Suigetsu</p>
+                    <p>Refleks Blok Gawang</p>
                 </div>
             </div>
             <button id="start-btn" onclick="startGame()">MULAI PERTANDINGAN</button>
@@ -56,10 +56,10 @@
                 </div>
             </div>
 
-            <!-- Canvas Lapangan (Diperbesar tingginya agar muat karakter full-body) -->
+            <!-- Canvas Lapangan -->
             <canvas id="gameCanvas" width="800" height="340"></canvas>
 
-            <!-- Virtual Controller (Tombol On-Screen) -->
+            <!-- Virtual Controller (On-Screen Touch Buttons) -->
             <div id="virtual-controller">
                 <div class="dpad-group">
                     <button class="ctrl-btn" ontouchstart="setControl('left', true)" ontouchend="setControl('left', false)" onmousedown="setControl('left', true)" onmouseup="setControl('left', false)">◀ Kiri</button>
