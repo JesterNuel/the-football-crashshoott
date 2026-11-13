@@ -1,0 +1,13 @@
+{
+  "name": "the-striker-football-cross",
+  "version": "1.0.0",
+  "description": "2D Football game adapted from The Spike Volleyball Cross mechanics",
+  "main": "index.html",
+  "scripts": {
+    "start": "lite-server"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
