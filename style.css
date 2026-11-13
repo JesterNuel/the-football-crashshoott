@@ -3,10 +3,11 @@
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
 }
 
 body {
-    background-color: #111;
+    background-color: #0b0b16;
     color: #fff;
     display: flex;
     justify-content: center;
@@ -17,16 +18,15 @@ body {
 
 #game-container {
     width: 800px;
-    height: 500px;
-    background: #1e1e2f;
-    border: 4px solid #00ffcc;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+    height: 520px;
+    background: #141423;
+    border: 3px solid #6c5ce7;
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(108, 92, 231, 0.4);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     position: relative;
+    overflow: hidden;
 }
 
 .screen {
@@ -34,9 +34,8 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 0;
 }
 
 .hidden {
@@ -44,80 +43,204 @@ body {
 }
 
 h1 {
-    font-size: 2.5rem;
-    color: #00ffcc;
-    text-shadow: 2px 2px #ff007f;
-    margin-bottom: 10px;
+    font-size: 1.8rem;
+    color: #a29bfe;
+    text-shadow: 2px 2px #6c5ce7;
+    margin-top: 25px;
+    margin-bottom: 5px;
     text-align: center;
 }
 
 p {
-    font-size: 1rem;
-    color: #bbb;
-    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: #b2bec3;
 }
 
 .role-select {
     display: flex;
-    gap: 15px;
-    margin-bottom: 25px;
+    gap: 12px;
+    margin: 15px 0;
 }
 
 .role-card {
-    background: #2a2a40;
-    border: 2px solid #444;
-    padding: 15px;
+    background: #1e1e36;
+    border: 2px solid #333;
+    padding: 12px;
     border-radius: 8px;
-    width: 180px;
+    width: 170px;
     text-align: center;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.2s;
 }
 
 .role-card:hover, .role-card.selected {
-    border-color: #00ffcc;
-    background: #35355a;
-    transform: translateY(-5px);
+    border-color: #a29bfe;
+    background: #2a2850;
 }
 
 .role-card h3 {
-    color: #ff007f;
-    margin-bottom: 8px;
+    color: #a29bfe;
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+}
+
+.role-card p {
+    font-size: 0.75rem;
 }
 
 button {
-    background: #00ffcc;
-    color: #111;
+    background: #6c5ce7;
+    color: #fff;
     font-weight: bold;
-    font-size: 1.1rem;
-    padding: 12px 30px;
+    font-size: 1rem;
+    padding: 10px 25px;
     border: none;
-    border-radius: 6px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background 0.2s;
 }
 
 button:hover {
-    background: #00cca3;
+    background: #5849be;
 }
 
-#scoreboard {
+/* --- HUD & CANVAS --- */
+#spike-hud {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    background: rgba(0,0,0,0.5);
-    border-bottom: 2px solid #333;
+    align-items: center;
+    background: #0f0f1a;
+    padding: 6px 15px;
+    border-bottom: 2px solid #6c5ce7;
+}
+
+.player-hud-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #1a1a2e;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border-left: 4px solid #a29bfe;
+}
+
+.right-card {
+    border-left: none;
+    border-right: 4px solid #ff7675;
+}
+
+.avatar {
+    width: 30px;
+    height: 30px;
+    background: #a29bfe;
+    color: #111;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.opponent-avatar {
+    background: #ff7675;
+    color: #fff;
+}
+
+.hud-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.text-right {
+    align-items: flex-end;
+}
+
+.p-name {
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #ccc;
+}
+
+.bar-container {
+    width: 90px;
+    height: 6px;
+    background: #333;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.fill-bar {
+    width: 100%;
+    height: 100%;
+    background: #a29bfe;
+}
+
+.opponent-bar {
+    background: #ff7675;
+}
+
+.center-score {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.score-num {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #a29bfe;
+}
+
+#match-timer {
+    font-size: 0.7rem;
+    color: #888;
+    background: #000;
+    padding: 2px 6px;
+    border-radius: 3px;
 }
 
 #gameCanvas {
-    background: linear-gradient(to bottom, #2b4c7e, #3a6073);
+    background: linear-gradient(to bottom, #1e1b4b, #312e81);
     display: block;
 }
 
-#controls-hint {
-    padding: 8px;
-    font-size: 0.85rem;
-    color: #888;
+/* --- VIRTUAL CONTROLLER --- */
+#virtual-controller {
+    width: 100%;
+    height: 95px;
+    background: #0d0d17;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-top: 1px solid #222;
 }
+
+.dpad-group, .action-group {
+    display: flex;
+    gap: 8px;
+}
+
+.ctrl-btn {
+    background: #252540;
+    color: #fff;
+    border: 2px solid #444;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #111;
+    transition: transform 0.05s, background 0.1s;
+}
+
+.ctrl-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #111;
+}
+
+.action-jump { background: #0984e3; border-color: #074b83; }
+.action-pass { background: #fdcb6e; border-color: #d19f3a; color: #111; }
+.action-shoot { background: #e84393; border-color: #a2155c; }
