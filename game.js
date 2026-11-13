@@ -5,12 +5,12 @@ let selectedRole = "ST";
 let scoreHome = 0;
 let scoreAway = 0;
 
-// Karakter Aizen (Full-Body Sprite Dimensi Ditingkatkan)
+// Karakter Aizen (Full-Body Sprite Dari Kepala Sampai Kaki)
 let player = {
     x: 120,
     y: 195,
     width: 28,
-    height: 68, // Proporsi Full-Body dari ujung rambut hingga kaki
+    height: 68,
     speed: 5.8,
     vx: 0,
     vy: 0,
@@ -42,6 +42,7 @@ let isCharging = false;
 let chargePower = 0;
 let chargeDirection = 1;
 
+// Kontrol Keyboard
 window.addEventListener("keydown", (e) => {
     if (e.code === "ArrowLeft" || e.code === "KeyA") input.left = true;
     if (e.code === "ArrowRight" || e.code === "KeyD") input.right = true;
@@ -107,7 +108,7 @@ function update() {
     player.x += player.vx;
     player.y += player.vy;
 
-    const groundLevel = 202; // Sesuaikan posisi berdiri di atas lapangan rumput
+    const groundLevel = 202;
     if (player.y > groundLevel) {
         player.y = groundLevel;
         player.vy = 0;
@@ -207,50 +208,48 @@ function draw() {
         ctx.beginPath(); ctx.moveTo(788, i); ctx.lineTo(800, i); ctx.stroke();
     }
 
-    // --- RENDER SPRITE KARAKTER AIZEN FULL-BODY (Ujung Kepala hingga Kaki) ---
+    // --- RENDER SPRITE FULL-BODY AIZEN ---
     let px = player.x;
     let py = player.y;
 
-    // 1. Rambut Khas Aizen (Ke belakang / Slicked back coklat tua)
+    // Rambut Aizen
     ctx.fillStyle = "#3e2723";
     ctx.fillRect(px + 4, py - 14, 20, 12);
 
-    // 2. Kepala & Wajah
+    // Kepala & Wajah
     ctx.fillStyle = "#ffdbac";
     ctx.fillRect(px + 6, py - 4, 16, 16);
-    // Kacamata khas Aizen (opsional / ikonik)
     ctx.strokeStyle = "#111";
     ctx.lineWidth = 1;
     ctx.strokeRect(px + 8, py, 12, 6);
 
-    // 3. Badan (Jas Putih / Haori Kapten / Seragam Putih Aizen)
+    // Jas Putih / Haori Aizen
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(px + 3, py + 12, 22, 28);
-    // Sabuk / Inner hitam
     ctx.fillStyle = "#111";
     ctx.fillRect(px + 10, py + 24, 8, 4);
 
-    // 4. Lengan & Tangan
+    // Lengan
     ctx.fillStyle = "#ffffff";
-    ctx.fillRect(px - 3, py + 14, 6, 22); // Lengan Kiri
-    ctx.fillRect(px + 25, py + 14, 6, 22); // Lengan Kanan
+    ctx.fillRect(px - 3, py + 14, 6, 22);
+    ctx.fillRect(px + 25, py + 14, 6, 22);
 
-    // 5. Celana & Kaki Full-Body (Ujung Kaki / Sepatu Hitam)
+    // Celana & Kaki Full-Body
     ctx.fillStyle = "#222222";
-    ctx.fillRect(px + 5, py + 40, 7, 28); // Kaki Kiri
-    ctx.fillRect(px + 16, py + 40, 7, 28); // Kaki Kanan
+    ctx.fillRect(px + 5, py + 40, 7, 28);
+    ctx.fillRect(px + 16, py + 40, 7, 28);
     
     // Sepatu
     ctx.fillStyle = "#111";
     ctx.fillRect(px + 3, py + 64, 10, 4);
     ctx.fillRect(px + 15, py + 64, 10, 4);
 
-    // Label Nama Role di atas Karakter
+    // Nama Label Aizen
     ctx.fillStyle = "#a29bfe";
     ctx.font = "bold 11px sans-serif";
     ctx.fillText("AIZEN", px - 2, py - 22);
 
-    // --- METERAN TIMING / POWER BAR (The Spike Style) ---
+    // --- TIMING BAR (The Spike Style) ---
     if (isCharging) {
         let barW = 38;
         let barH = 5;
@@ -264,7 +263,7 @@ function draw() {
         ctx.fillStyle = (chargePower > 70 && chargePower < 95) ? "#00ffcc" : "#e84393";
         ctx.fillRect(bx, by, fillW, barH);
         
-        ctx.strokeStyle = "#fff;
+        ctx.strokeStyle = "#fff";
         ctx.strokeRect(bx, by, barW, barH);
     }
 
